@@ -3,18 +3,25 @@ package mytld.mycompany.myapp.board.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import mytld.mycompany.myapp.board.service.BoardService;
 
 @Controller
 public class BoardController {
 	
 	/* @Autowired */
 	/* private JdbcTemplate jdbcTemplate; */
+	
+	@Autowired
+	BoardService BoardService;
 	
 	@RequestMapping(value="/create", method = RequestMethod.GET)
 	public String getCreate(Locale locale, Model model) {
@@ -35,6 +42,15 @@ public class BoardController {
         
 		return "board/create";
 	}
+	
+	@RequestMapping(value="/create", method=RequestMethod.POST)
+	public String postCreate(@RequestParam Map<String, Object> map) {
+		int boardContSeq = this.BoardService.create(map);
+		return "redirect:/read/" + String.valueOf(boardContSeq);
+	}
+
+	
+	
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String getList() {

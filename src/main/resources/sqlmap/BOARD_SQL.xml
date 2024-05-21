@@ -8,10 +8,10 @@
 				select SEQ_BOARD.NEXTVAL from dual <!-- select절만 사용할 경우 from dual이 있어야 사용가능 -->
 			</selectKey>
 			<![CDATA[
-			insert into TB_BLG_CONT
+			insert into BOARD
 			(SEQ_BOARD, TITLE, CONTENTS, BOARD_ID)
 			values
-			(#{seq_board}, #{title}, #{content_body}, 'sampleID')
+			(#{seq_board}, #{title}, #{content_body}, 'AAA')
 			]]>
 		</insert>
 
