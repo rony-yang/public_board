@@ -18,15 +18,15 @@
 			<div id="sidebar">
 
 				<!-- Logo -->
-					<h1 id="logo"><a href="#">게시판</a></h1>
+					<h1 id="logo"><a href="/">게시판</a></h1>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
 							<!-- <li class="current"><a href="#">Latest Post</a></li> -->
-							<li><a href="#">게시판</a></li>
-							<li><a href="#">회원가입</a></li>
-							<li><a href="#">로그인</a></li>
+							<li><a href="/">게시판</a></li>
+							<li><a href="/register">회원가입</a></li>
+							<li><a href="login">로그인</a></li>
 						</ul>
 					</nav>
 

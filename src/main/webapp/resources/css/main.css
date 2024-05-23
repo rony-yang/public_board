@@ -1791,9 +1791,25 @@ input, select, textarea {
 	}
 
 	input[type="button"],
-	input[type="reset"],
-	button,
+	button, 
 	.button {
+		cursor: pointer;
+		background-color: #00b33c;
+		border-radius: 0.4em;
+		text-align: center;
+		box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15);
+		color: #fff;
+		font-family: 'Open Sans Condensed', sans-serif;
+		font-weight: 700;
+		text-decoration: none;
+		-moz-transition: background-color .25s ease-in-out, color .25s ease-in-out;
+		-webkit-transition: background-color .25s ease-in-out, color .25s ease-in-out;
+		-ms-transition: background-color .25s ease-in-out, color .25s ease-in-out;
+		transition: background-color .25s ease-in-out, color .25s ease-in-out;
+		text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.5);
+	}
+
+	input[type="reset"] {
 		cursor: pointer;
 		background-color: #c94663;
 		border-radius: 0.4em;
@@ -1823,12 +1839,18 @@ input, select, textarea {
 			cursor: default;
 		}
 
+		input[type="submit"]:hover {
+			background-color: #4d94ff;
+		}
+		
+		input[type="reset"]:hover {
+			background-color: #d7758a;
+		}
+		
 		input[type="button"]:hover,
-		input[type="submit"]:hover,
-		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: #d95673;
+			background-color: #00ff55;
 		}
 
 		input[type="button"]:active,

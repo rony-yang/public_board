@@ -24,4 +24,16 @@ public class BoardServiceImpl implements BoardService {
 		return seq;
 	}
 
+	@Override
+	public int getNextSeqBoard() {
+		return BoardDAO.getNextSeqBoard();
+	}
+
+	@Override
+	public Map<String, Object> read(int boardContSeq) {
+		Map<String, Object> boardCont = this.BoardDAO.selectOne(boardContSeq);
+		return boardCont;
+	}
+
+
 }

@@ -23,11 +23,7 @@
             margin-bottom: 0;
         }
         .input1 {
-/*             width: 1%; */
-            margin-right: 15%;
-        }
-        .input2 {
-            /* width: 15%; */
+            margin-right: 10%;
         }
     	</style>
 	</head>
@@ -40,10 +36,11 @@
 				<form method="post">
 					<div class="form-row">
 	            		<p>번호</p>
-<%-- 		            	<input class="input1" type="text" value="${nextSeqBoard}" > --%>
+						<input class="input1" type="text" value="${nextSeqBoard}" style="width: 10%;" readonly >
 			            <p>작성일</p>
-			            <input class="input2" type="text" name="input_date" value="${serverTime}" >
+			            <input class="input2" type="text" name="input_date" value="${serverTime}" readonly >
 					</div>
+					<br>
 					<p>
 						제목
 						<input type='text' name='title'/>
@@ -57,7 +54,8 @@
 					</p>
 					<p>
 						<input type='submit' value="글 작성"/>
-						<input type='button' value="취소" onclick="window.location.href=''"/>
+						<input type='reset' value="취소" onclick="window.location.reload();"/>
+						<input type="button" value="목록 돌아가기" onclick="window.location.href = '/';">
 					</p>
 				</form>
 

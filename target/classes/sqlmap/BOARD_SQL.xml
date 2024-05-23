@@ -2,18 +2,35 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="board_insert">
+	
+		<!-- 시퀀스 추출 -->
+		<select id="getNextSeqBoard" resultType="int">
+			select max(SEQ_BOARD) from BOARD
+		</select>
+	
 		<insert id="insert" parameterType="hashMap"> <!-- hashMap은 인터페이스 구현클래스 -->
 			<!-- 시퀀스 추출 -->
 			<selectKey keyProperty="seq_board" resultType="java.lang.Integer" order="BEFORE"> <!-- 쿼리 실행 결과를 keyProperty 안에 담아준다 -->
 				select SEQ_BOARD.NEXTVAL from dual <!-- select절만 사용할 경우 from dual이 있어야 사용가능 -->
 			</selectKey>
 			<![CDATA[
-			insert into BOARD
-			(SEQ_BOARD, TITLE, CONTENTS, BOARD_ID)
-			values
-			(#{seq_board}, #{title}, #{content_body}, 'AAA')
+				insert into BOARD
+				(SEQ_BOARD, TITLE, CONTENTS, BOARD_ID)
+				values
+				(#{seq_board}, #{title}, #{content_body}, 'AAA')
 			]]>
 		</insert>
 
+		<!-- 글 세부내용 확인 페이지 -->
+		<select id="selectOne" parameterType="java.lang.Integer" resultType="hashMap">
+			<![CDATA[
+				select SEQ_BOARD, BOARD_DATE, TITLE, TO_CHAR(CONTENTS) as CONTENTS, BOARD_ID
+				from BOARD 
+				where SEQ_BOARD = #{boardContSeq}
+			]]>
+		</select>
+	
+	
+	
 	
 	</mapper>
