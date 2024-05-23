@@ -30,7 +30,14 @@
 			]]>
 		</select>
 	
-	
+		<!-- 글 수정하기 -->
+		<update id="update" parameterType="mytld.mycompany.myapp.board.vo.EditRequestVO">
+			<![CDATA[
+				UPDATE BOARD
+				SET TITLE = #{title}, CONTENTS = #{content_body}
+				WHERE SEQ_BOARD = #{boardContSeq}
+			]]>
+		</update>
 	
 	
 	</mapper>

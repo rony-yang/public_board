@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import mytld.mycompany.myapp.board.service.BoardService;
+import mytld.mycompany.myapp.board.vo.EditRequestVO;
 
 @Controller
 public class BoardController {
@@ -53,6 +56,16 @@ public class BoardController {
 		return "board/read";
 	}
 
+	/* 글 수정하기 */
+	@RequestMapping(value="/read/{boardContSeq}", method=RequestMethod.POST)
+	public String putEdit(EditRequestVO editRequestVO) {
+		boolean isSuccessEdit = this.BoardService.edit(editRequestVO);
+		if (isSuccessEdit) {
+			return "redirect:/read/" + String.valueOf(editRequestVO.getBoardContSeq());
+		} 
+		return "redirect:/list";
+	}
+	
 	
 	
 	/* 메인으로 나오는 전체 글 목록 페이지 */

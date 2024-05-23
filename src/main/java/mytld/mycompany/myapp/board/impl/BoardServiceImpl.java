@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import mytld.mycompany.myapp.board.dao.BoardDAO;
 import mytld.mycompany.myapp.board.service.BoardService;
+import mytld.mycompany.myapp.board.vo.EditRequestVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -35,5 +36,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardCont;
 	}
 
+	@Override
+	public boolean edit(EditRequestVO editRequestVO) {
+		int affectRowsCount = this.BoardDAO.update(editRequestVO);
+		return affectRowsCount > 0;
+	}
 
 }

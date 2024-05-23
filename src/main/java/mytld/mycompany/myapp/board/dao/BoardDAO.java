@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import mytld.mycompany.myapp.board.vo.EditRequestVO;
+
 @Repository
 public class BoardDAO {
 	@Autowired
@@ -29,6 +31,10 @@ public class BoardDAO {
 
 	public Map<String, Object> selectOne(int boardContSeq) {
 		return this.sqlSessionTemplate.selectOne("board_insert.selectOne", boardContSeq);
+	}
+	
+	public int update(EditRequestVO editRequestVO) {
+		return this.sqlSessionTemplate.update("board_insert.update", editRequestVO);
 	}
 	
 	
