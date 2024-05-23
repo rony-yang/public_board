@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mytld.mycompany.myapp.board.dao.BoardDAO;
+import mytld.mycompany.myapp.board.mapper.BoardMapper;
 import mytld.mycompany.myapp.board.service.BoardService;
 import mytld.mycompany.myapp.board.vo.EditRequestVO;
 
@@ -13,10 +14,12 @@ import mytld.mycompany.myapp.board.vo.EditRequestVO;
 public class BoardServiceImpl implements BoardService {
 
 	private BoardDAO BoardDAO;
+	private BoardMapper boardMapper;
 
 	@Autowired
-	public BoardServiceImpl(BoardDAO BoardDAO) {
-	this.BoardDAO = BoardDAO;
+	public BoardServiceImpl(BoardDAO BoardDAO, BoardMapper boardMapper) {
+		this.BoardDAO = BoardDAO;
+		this.boardMapper = boardMapper;
 	}
 
 	@Override
@@ -40,6 +43,11 @@ public class BoardServiceImpl implements BoardService {
 	public boolean edit(EditRequestVO editRequestVO) {
 		int affectRowsCount = this.BoardDAO.update(editRequestVO);
 		return affectRowsCount > 0;
+	}
+	
+	@Override
+	public boolean delete(int boardContSeq) {
+		return this.boardMapper.delete(boardContSeq) > 0;
 	}
 
 }

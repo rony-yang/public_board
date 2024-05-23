@@ -62,6 +62,13 @@
 						<input type='submit' value="수정하기"/>
 						<input type="button" value="목록 돌아가기" onclick="window.location.href = '/';">
 					</p>
+					<div>
+					</div>
+				</form>
+				<form method="post" action="/delete">
+					<input type="hidden" name = "_method" value = "delete"/>
+					<input type="hidden" name = "boardContSeq" value = "${boardContent.SEQ_BOARD}"/>
+					<input type="submit" name="delete_button" value="삭제" style="background-color: #c94663;" />
 				</form>
 
 				</div>

@@ -9,5 +9,6 @@ public interface BoardService {
 	int getNextSeqBoard();
 	Map<String, Object> read(int blogContSeq);
 	boolean edit(EditRequestVO editRequestVO);
+	boolean delete(int boardContSeq);
 
 }
