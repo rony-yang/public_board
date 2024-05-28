@@ -2,28 +2,34 @@ package mytld.mycompany.myapp.board.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import mytld.mycompany.myapp.board.service.BoardService;
 import mytld.mycompany.myapp.board.vo.EditRequestVO;
+import mytld.mycompany.myapp.board.vo.ListRequestVO;
+import mytld.mycompany.myapp.board.vo.ListResponseVO;
 
 @Controller
 public class BoardController {
 
 	@Autowired
 	BoardService BoardService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	/* 글 쓰기 화면 렌더링 */
 	@RequestMapping(value="/create", method = RequestMethod.GET)
@@ -73,14 +79,16 @@ public class BoardController {
 		return "redirect:/";
 	}
 	
-	
-	
-	
-	/* 메인으로 나오는 전체 글 목록 페이지 */
-	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String getList() {
-		return "board/list";
+	/* 전체 메인 화면 */
+	@GetMapping("/")
+	public String list(ListRequestVO listRequestVO, Model model) {
+		/* logger.info("Search Term: {}", listRequestVO.getSearch()); */
+        
+        List<ListResponseVO> listResponseVOList = this.BoardService.list(listRequestVO);
+		/* logger.info("List Response: {}", listResponseVOList); */
+        
+        model.addAttribute("listRequestVO", listRequestVO);
+        model.addAttribute("listResponseVOList", listResponseVOList);
+        return "/board/list";
 	}
-
-	
 }

@@ -8,7 +8,27 @@
 				WHERE SEQ_BOARD = #{boardContSeq}
 			]]>
 		</delete>
-
+		
+		<resultMap id="selectListResultMap" type="mytld.mycompany.myapp.board.vo.ListResponseVO">
+			<result column="SEQ_BOARD" property="boardContSeq" jdbcType="INTEGER" javaType="int"/>
+			<result column="TITLE" property="title" jdbcType="NVARCHAR" javaType="String"/>
+			<result column="CONTENTS" property="content_body" jdbcType="NVARCHAR" javaType="String"/>
+			<result column="BOARD_ID" property="board_id" jdbcType="NVARCHAR" javaType="String"/>
+			<result column="BOARD_DATE" property="insertDt" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime"/>
+		</resultMap>
 	
+		<select id="selectList" parameterType="mytld.mycompany.myapp.board.vo.ListRequestVO" resultMap="selectListResultMap">
+			<![CDATA[
+				SELECT SEQ_BOARD, TITLE, TO_CHAR(CONTENTS) as CONTENTS, BOARD_DATE, BOARD_ID
+				from BOARD
+				WHERE 1 = 1
+			]]>
+			<if test="search != null and search != ''">
+				AND (TITLE LIKE '%'||#{search}||'%' 
+				OR CONTENTS LIKE '%'||#{search}||'%' 
+				OR BOARD_ID LIKE '%'||#{search}||'%')
+			</if>
+				ORDER BY SEQ_BOARD ASC
+		</select>
 	
 	</mapper>

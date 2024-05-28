@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <!--
 	Striped by HTML5 UP
@@ -20,6 +22,27 @@
 			#main_title2 {
 				font-family: 'TTHakgyoansimUndongjangL';
 			}
+	        .form-row {
+	            display: flex;
+	            align-items: center;
+	            justify-content: flex-start;
+        	}
+        	.form-row form {
+        		display: flex;
+        		width: 100%;
+        	}
+        	.form-row input[type="text"] {
+        		flex-grow: 1;
+        		margin-right: 10px;
+        	}
+    	    table {
+	            width: 100%;
+	        }
+            .col-1 { width: 10%; }
+	        .col-2 { width: 15%; }
+	        .col-3 { width: 40%; }
+	        .col-4 { width: 25%; }
+	        .col-5 { width: 10%; }
 		</style>
 	</head>
 	<body class="is-preload">
@@ -34,9 +57,48 @@
 								<h2 id="main_title">게시판</h2>
 								<p id="main_title2">자유롭게 사용 가능한 게시판입니다.</p>
 							</header>
-							<p>
-ddd
-							</p>
+
+	<div class="form-row">
+		<form>
+			<input type="text" name="search" value="${listRequestVO.search}" style="width:50%;"/>
+			<input type="submit" name="search_button" value="검색" />
+		</form>
+	</div>
+	<c:if test="${not empty listResponseVOList}">
+	<br />
+		<table>
+			<thead>
+				<tr>
+				<th>글번호</th>
+				<th>작성자</th>
+				<th>제목</th>
+				<th>입력일</th>
+				<th>글 보기</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="listResponseVO" items="${listResponseVOList}">
+					<tr>
+						<td class="col-1">${listResponseVO.boardContSeq}</td>
+                        <td class="col-2">${listResponseVO.board_id}</td>
+                        <td class="col-3">${listResponseVO.title}</td>
+                        <td class="col-4">${listResponseVO.insertDtFormat}</td>
+                        <td class="col-5"><a href="/read/${listResponseVO.boardContSeq}">상세보기</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</c:if>
+	<c:if test="${empty listResponseVOList}">
+		<br /><strong>검색 결과가 없습니다.</strong>
+	</c:if>
+	<br />
+	<input type="button" onclick="location.href='/create'" value="글 작성"></input>
+
+
+
+
+
 						</article>
 
 <!-- 					Pagination

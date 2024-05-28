@@ -1,18 +1,34 @@
 package mytld.mycompany.myapp.board.vo;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class listResponseVO {
-	private int seq_board;
+public class ListResponseVO {
+	private int boardContSeq;
 	private String title;
-	private String contents;
-	private LocalDateTime board_date;
+	private String content_body;
 	private String board_id;
-	public int getSeq_board() {
-		return seq_board;
+	
+	public String getBoard_id() {
+		return board_id;
 	}
-	public void setSeq_board(int seq_board) {
-		this.seq_board = seq_board;
+	public void setBoard_id(String board_id) {
+		this.board_id = board_id;
+	}
+
+	private LocalDateTime insertDt;
+	
+	public LocalDateTime getInsertDt() {
+		return insertDt;
+	}
+	public void setInsertDt(LocalDateTime insertDt) {
+		this.insertDt = insertDt;
+	}
+	public int getBoardContSeq() {
+		return boardContSeq;
+	}
+	public void setBoardContSeq(int boardContSeq) {
+		this.boardContSeq = boardContSeq;
 	}
 	public String getTitle() {
 		return title;
@@ -20,22 +36,14 @@ public class listResponseVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContents() {
-		return contents;
+	public String getContent_body() {
+		return content_body;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setContent_body(String content_body) {
+		this.content_body = content_body;
 	}
-	public LocalDateTime getBoard_date() {
-		return board_date;
-	}
-	public void setBoard_date(LocalDateTime board_date) {
-		this.board_date = board_date;
-	}
-	public String getBoard_id() {
-		return board_id;
-	}
-	public void setBoard_id(String board_id) {
-		this.board_id = board_id;
+	
+	public String getInsertDtFormat() {
+		return this.insertDt.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 EEEE"));
 	}
 }
