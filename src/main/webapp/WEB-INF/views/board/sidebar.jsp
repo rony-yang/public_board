@@ -22,20 +22,13 @@
 
 				<!-- Nav -->
 					<nav id="nav">
-						<ul>
+						<ul style="padding-bottom: 150%;">
 							<!-- <li class="current"><a href="#">Latest Post</a></li> -->
 							<li><a href="/">게시판</a></li>
 							<li><a href="/register">회원가입</a></li>
 							<li><a href="login">로그인</a></li>
 						</ul>
 					</nav>
-
-				<!-- Search -->
-					<section class="box search">
-						<form method="post" action="#">
-							<input type="text" class="text" name="search" placeholder="Search" />
-						</form>
-					</section>
 
 
 <!-- 				Recent Posts
