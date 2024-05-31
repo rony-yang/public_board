@@ -13,52 +13,86 @@
 	#go_login {
 	    font-family: 'TTHakgyoansimUndongjangL';
 	}
+	.pStyle {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4%;
+	}
+	.textStyle {
+		align-items: center;
+	    flex: 0 0 20%; /* 처음에 20%를 차지 */
+	}
+    .inputStyle {
+    	flex: 1
+     }
+    .buttonStyle {
+        margin-left: 4%;
+        
+    }
      </style>
 </head>
 <body>
 <div id="content">
 	<div class="inner">
 	
-	<form method="post">
-		<p>
-			이름
-			<input type='text' name='name'/>
+	<form method="post" id='registerForm' action='/register'>
+		<p class='pStyle'>
+			<span class="textStyle">이름</span>
+			<input type='text' name='name' class='inputStyle' autofocus/>
 		</p>
-		<p>
-			아이디
-			<input type='text' name='id'/>
+		<p class='pStyle'>
+			<span class="textStyle">아이디</span>
+			<input type='text' name='id' class='inputStyle'/>
+			<input type='button' value="중복확인" class='buttonStyle' onclick='checkDuplicate();'/>
 		</p>
-		<p>
-			비밀번호
-			<input type='text' name='password'/>
+		<p class='pStyle'>
+			<span class="textStyle">비밀번호</span>
+			<input type='password' name='password' class='inputStyle'/>
 		</p>
-		<p>
-			비밀번호 확인
-			<input type='text' name='password_confirm'/>
-		</p>
-		<p>
-			생년월일
-			<input type='text' name='birth'/>
-		</p>
-		<p>
-			주소
-			<input type='text' name='address'/>
-		</p>
-		<p>
-			휴대폰번호
-			<input type='text' name='tel_number'/>
-		</p>
-		<p>
-			<input type='submit' value="회원가입"/>
+		<p class='pStyle'>
+			<span class="textStyle">비밀번호 확인</span>
+			<input type='password' name='password_confirm' class='inputStyle'/>
+		</p>		
+		<p class='pStyle'>
+			<span class="textStyle">생년월일</span>
+			<input type='text' name='birth' class='inputStyle'/>
+		</p>		
+		<p class='pStyle'>
+			<span class="textStyle">주소</span>
+			<input type='text' name='address' class='inputStyle'/>
+		</p>		
+		<p class='pStyle'>
+			<span class="textStyle">휴대폰번호</span>
+			<input type='text' name='tel_number' class='inputStyle'/>
+		</p>		
+		<p style='margin-top: 10%; text-align: center;'>
+			<input type='submit' value="회원가입" onclick='goRegister();'/>
 			<input type='reset' value="취소" onclick="window.location.reload();"/>
 		</p>	
 			<br>
-		<p id='go_login'>아이디가 이미 있다면?&emsp;
+		<p id='go_login' style='text-align: center;'>아이디가 이미 있다면?&emsp;
 			<input type="button" value="로그인하기" onclick="window.location.href = './login';">
 		 </p>
 	</form>
 
 	</div>
 </div>
+
+
+<script>
+// 아이디 중복확인
+function checkDuplicate() {
+    document.getElementById('registerForm').action = "/checkDuplicate";
+    document.getElementById('registerForm').submit();
+}
+    
+// 회원가입
+function goRegister() {
+    document.getElementById('registerForm').action = "/register";
+    document.getElementById('registerForm').submit();
+}
+</script>
+
+
 </body>
 </html>
