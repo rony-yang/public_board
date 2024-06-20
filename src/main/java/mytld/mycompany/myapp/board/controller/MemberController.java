@@ -1,15 +1,17 @@
 package mytld.mycompany.myapp.board.controller;
 
+import java.util.HashMap;
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import mytld.mycompany.myapp.board.service.MemberService;
 
@@ -30,19 +32,19 @@ public class MemberController {
 	/* 회원가입 저장 */
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String postRegister(@RequestParam Map<String, Object> map) {
-	    logger.info("회원가입 요청: {}", map);
 	    this.memberService.register(map);
 	    return "member/login";
 	}
 	
-	/* 아이디 중복확인
-    @RequestMapping(value="/checkDuplicate", method=RequestMethod.POST)
-    public String checkDuplicate(@RequestParam String id, Model model) {
+	/* 아이디 중복확인  */
+    @PostMapping("/checkDuplicate")
+    public @ResponseBody Map<String, Boolean> checkDuplicate(@RequestParam String id) {
         boolean isDuplicate = memberService.checkDuplicate(id);
-        model.addAttribute("isDuplicate", isDuplicate);
-        return "checkDuplicateResult";
-    }	
-     */
+        Map<String, Boolean> response = new HashMap<String, Boolean>();
+        response.put("isDuplicate", isDuplicate);
+        return response;
+    }
+
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String getLogin() {

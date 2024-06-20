@@ -16,7 +16,7 @@
 	.pStyle {
         display: flex;
         align-items: center;
-        margin-bottom: 4%;
+        margin-top: 4%;
 	}
 	.textStyle {
 		align-items: center;
@@ -29,6 +29,13 @@
         margin-left: 4%;
         
     }
+    .duplicateResult {
+	    display: block; 
+	    width: 100%; 
+	    text-align: center; 
+	    color: red;
+	    font-weight: bold;
+	}
      </style>
 </head>
 <body>
@@ -41,10 +48,11 @@
 			<input type='text' name='name' class='inputStyle' autofocus/>
 		</p>
 		<p class='pStyle'>
-			<span class="textStyle">아이디</span>
-			<input type='text' name='id' class='inputStyle'/>
-			<input type='button' value="중복확인" class='buttonStyle' onclick='checkDuplicate();'/>
+		    <span class="textStyle">아이디</span>
+		    <input type='text' name='id' id='id' class='inputStyle'/>
+		    <button type='button' onclick='checkDuplicate();' class='buttonStyle'>중복확인</button>
 		</p>
+		<p id="duplicateResult" class="duplicateResult"></p>
 		<p class='pStyle'>
 			<span class="textStyle">비밀번호</span>
 			<input type='password' name='password' class='inputStyle'/>
@@ -66,7 +74,7 @@
 			<input type='text' name='tel_number' class='inputStyle'/>
 		</p>		
 		<p style='margin-top: 10%; text-align: center;'>
-			<input type='submit' value="회원가입" onclick='goRegister();'/>
+			<input type='submit' value="회원가입"/>
 			<input type='reset' value="취소" onclick="window.location.reload();"/>
 		</p>	
 			<br>
@@ -78,20 +86,34 @@
 	</div>
 </div>
 
-
 <script>
-// 아이디 중복확인
+// 아이디 중복확인 : form 중복 사용이 안돼서 ajax 사용
 function checkDuplicate() {
-    document.getElementById('registerForm').action = "/checkDuplicate";
-    document.getElementById('registerForm').submit();
-}
+    var id = document.getElementById('id').value;
     
-// 회원가입
-function goRegister() {
-    document.getElementById('registerForm').action = "/register";
-    document.getElementById('registerForm').submit();
+    // ajax 요청 생성
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/checkDuplicate', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) { // 성공
+                var response = JSON.parse(xhr.responseText);
+                var duplicateResultElement = document.getElementById('duplicateResult');
+                if (response.isDuplicate) {
+                    duplicateResultElement.textContent = '사용 가능한 아이디입니다.';
+                } else {
+                    duplicateResultElement.textContent = '중복된 아이디입니다.';
+                }
+            } else { // 실패
+                console.error('Error: ' + xhr.status);
+            }
+        }
+    };
+    xhr.send('id=' + encodeURIComponent(id));
 }
 </script>
+
 
 
 </body>
