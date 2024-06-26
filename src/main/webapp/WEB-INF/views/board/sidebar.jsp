@@ -11,7 +11,21 @@
 #nav, .box, #copyright {
 	font-family: 'HakgyoansimSantteutdotumL';
 }
+.logout-link {
+    text-align: center;
+    text-decoration: underline;
+	margin-top: -20px;
+	display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 0;
+}
 </style>
+    <% if (request.getParameter("duplicate") != null) { %>
+    	<script>
+        	alert("이미 로그인 되어 있습니다.");
+        </script>
+    <% } %>
 </head>
 <body>
 		<!-- Sidebar -->
@@ -31,32 +45,17 @@
 					</nav>
 
 
-<!-- 				Recent Posts
-					<section class="box recent-posts">
-						<header>
-							<h2>Recent Posts</h2>
-						</header>
-						<ul>
-							<li><a href="#">Lorem ipsum dolor</a></li>
-							<li><a href="#">Feugiat nisl aliquam</a></li>
-							<li><a href="#">Sed dolore magna</a></li>
-							<li><a href="#">Malesuada commodo</a></li>
-							<li><a href="#">Ipsum metus nullam</a></li>
-						</ul>
-					</section>
-
-				Recent Comments
-					<section class="box recent-comments">
-						<header>
-							<h2>Recent Comments</h2>
-						</header>
-						<ul>
-							<li>case on <a href="#">Lorem ipsum dolor</a></li>
-							<li>molly on <a href="#">Sed dolore magna</a></li>
-							<li>case on <a href="#">Sed dolore magna</a></li>
-						</ul>
-					</section> -->
-
+					<%
+					// 세션에서 로그인된 사용자 아이디 가져오기
+					String loginId = (String) session.getAttribute("loginId");
+					%>
+			
+					<% if (loginId != null && !loginId.isEmpty()) { %>
+						<p style="text-align: center;"><%= loginId %> 님 로그인 중입니다.</p>
+						<a href="/logout" class="logout-link">로그아웃</a>
+					<% } else { %>
+						<p style="text-align: center;">로그인 정보가 없습니다.</p>
+					<% } %>
 
 				<!-- Copyright -->
 					<ul id="copyright">

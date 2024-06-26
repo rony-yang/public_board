@@ -35,15 +35,22 @@
 <div id="content">
 	<div class="inner">
 	
+    <%-- 아이디, 비밀번호 확인 창 --%>
+    <% if (request.getParameter("error") != null) { %>
+        <script>
+            alert("아이디 또는 비밀번호가 잘못되었습니다.");
+        </script>
+    <% } %> 
+	
 	<form method="post" action="/login">
 
 		<p class='pStyle'>
 			<span class="textStyle">아이디</span>
-			<input type='text' name='login_id' class='inputStyle' autofocus/>
+			<input type='text' name='login_id' class='inputStyle'  value="${login_id != null ? login_id : ''}" autofocus/>
 		</p>
 		<p class='pStyle'>
 			<span class="textStyle">비밀번호</span>
-			<input type='text' name='login_password' class='inputStyle'/>
+			<input type='password' name='login_password' class='inputStyle'/>
 		</p>
 
 		<p style='margin-top: 10%; text-align: center;'>

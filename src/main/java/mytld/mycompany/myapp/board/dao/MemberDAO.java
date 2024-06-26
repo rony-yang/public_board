@@ -28,11 +28,13 @@ public class MemberDAO {
 	
 	/* 로그인 */
 	public int login(Map<String, Object> map) {
-		int result = this.sqlSessionTemplate.selectOne("mytld.mycompany.myapp.board.mapper.MemberMapper.loginConfirm", map);
-		if (result > 0) { 
-			return (Integer) map.get("id");
-		}
-		return -1;
+        try {
+            int result = sqlSessionTemplate.selectOne("mytld.mycompany.myapp.board.mapper.MemberMapper.loginConfirm", map);
+            return result; 
+        } catch (Exception e) {
+            logger.error("Error during login", e);
+            return -1;
+        }
 	}
 
 }
