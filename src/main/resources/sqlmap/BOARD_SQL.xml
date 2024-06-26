@@ -17,7 +17,7 @@
 				insert into BOARD
 				(SEQ_BOARD, TITLE, CONTENTS, BOARD_ID)
 				values
-				(#{seq_board}, #{title}, #{content_body}, 'AAA')
+				(#{seq_board}, #{title}, #{content_body}, #{loginId})
 			]]>
 		</insert>
 

@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="resources/css/main.css" />
    	<jsp:include page="/WEB-INF/views/board/sidebar.jsp" /> <!-- 사이드바 -->
    	<link rel="stylesheet" type="text/css" href="resources/css/fonts.css"> <!-- 폰트 -->
+   	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    	<style>
  	#go_register {
 	    font-family: 'TTHakgyoansimUndongjangL';
@@ -35,12 +36,18 @@
 <div id="content">
 	<div class="inner">
 	
-    <%-- 아이디, 비밀번호 확인 창 --%>
+    <%-- 아이디, 비밀번호 확인 창 
     <% if (request.getParameter("error") != null) { %>
         <script>
             alert("아이디 또는 비밀번호가 잘못되었습니다.");
         </script>
-    <% } %> 
+    <% } %> --%>
+    
+    <c:if test="${not empty error}">
+	    <script>
+	        alert("${error}");
+	    </script>
+	</c:if>
 	
 	<form method="post" action="/login">
 

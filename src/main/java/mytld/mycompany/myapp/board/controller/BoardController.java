@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mytld.mycompany.myapp.board.service.BoardService;
 import mytld.mycompany.myapp.board.vo.EditRequestVO;
@@ -33,7 +36,17 @@ public class BoardController {
 	
 	/* 글 쓰기 화면 렌더링 */
 	@RequestMapping(value="/create", method = RequestMethod.GET)
-	public String getCreate(Locale locale, Model model) {
+	public String getCreate(Locale locale, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+		
+		// 로그인 된 아이디 찾기
+	    String loginId = (String) session.getAttribute("loginId");
+	    
+	    // 로그인 된 회원만 글쓰기 가능
+	    if (loginId == null || loginId.isEmpty()) {
+	        redirectAttributes.addFlashAttribute("error", "로그인을 먼저 해주세요.");
+	        return "redirect:/login";
+	    }
+		
 		
 		// 날짜 가져오기
 		Date date = new Date();
@@ -50,7 +63,16 @@ public class BoardController {
 	
 	/* 글 쓰기 화면 저장 */
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String postCreate(@RequestParam Map<String, Object> map) {
+	public String postCreate(@RequestParam Map<String, Object> map, HttpSession session, RedirectAttributes redirectAttributes) {
+		
+	    String loginId = (String) session.getAttribute("loginId");
+
+	    if (loginId == null || loginId.isEmpty()) {
+	        redirectAttributes.addFlashAttribute("error", "로그인을 먼저 해주세요.");
+	        return "redirect:/login";
+	    }
+		
+	    map.put("loginId", loginId); // 로그인된 사용자 ID를 추가
 		int boardContSeq = this.BoardService.create(map);
 		return "redirect:/read/" + String.valueOf(boardContSeq);
 	}

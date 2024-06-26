@@ -2,25 +2,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="resources/css/fonts.css">
-<style>
-#logo, #logo a {
-    font-family: 'Cafe24Moyamoya-Regular-v1.0';
-}
-#nav, .box, #copyright {
-	font-family: 'HakgyoansimSantteutdotumL';
-}
-.logout-link {
-    text-align: center;
-    text-decoration: underline;
-	margin-top: -20px;
-	display: block;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 5px 0;
-}
-</style>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="resources/css/fonts.css">
+	<style>
+		#logo, #logo a {
+		    font-family: 'Cafe24Moyamoya-Regular-v1.0';
+		}
+		#nav, .box, #copyright {
+			font-family: 'HakgyoansimSantteutdotumL';
+		}
+		.logout-link {
+		    text-align: center;
+		    text-decoration: underline;
+			margin-top: -20px;
+			display: block;
+		    width: 100%;
+		    box-sizing: border-box;
+		    padding: 5px 0;
+		}
+	</style>
     <% if (request.getParameter("duplicate") != null) { %>
     	<script>
         	alert("이미 로그인 되어 있습니다.");
