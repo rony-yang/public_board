@@ -24,6 +24,15 @@
 	            where ID = #{id}
 	        ]]>
 	    </select>
+	    
+   		<!-- 로그인 시 가입 정보 확인 -->
+	    <select id="loginConfirm" parameterType="java.util.Map" resultType="java.lang.Integer">
+	        <![CDATA[
+	            select count(*) as cnt
+	            from MEMBER 
+	            where ID = #{id} and PASSWORD = #{password}
+	        ]]>
+	    </select>
 	
 	
 	</mapper>

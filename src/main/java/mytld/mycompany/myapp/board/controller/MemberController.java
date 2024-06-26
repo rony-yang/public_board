@@ -45,11 +45,21 @@ public class MemberController {
         return response;
     }
 
-	
+	/* 로그인 페이지  */
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String getLogin() {
 		return "member/login";
 	}
-
+	
+	/* 로그인 기능  */
+	@RequestMapping(value="/login", method = RequestMethod.POST)
+	public String postLogin(@RequestParam("login_id") String loginId, @RequestParam("login_password") String loginPassword) {
+		logger.info("아이디: " + loginId+" , 비밀번호: " + loginPassword);
+		
+	    return "redirect:/";
+	}	
+	
+	
+	
 	
 }

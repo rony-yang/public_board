@@ -42,7 +42,7 @@
 <div id="content">
 	<div class="inner">
 	
-	<form method="post" id='registerForm' action='/register'>
+	<form id="registerForm" method="post" id='registerForm' action='/register' onsubmit="return validateForm()">
 		<p class='pStyle'>
 			<span class="textStyle">이름</span>
 			<input type='text' name='name' class='inputStyle' autofocus/>
@@ -63,7 +63,7 @@
 		</p>		
 		<p class='pStyle'>
 			<span class="textStyle">생년월일</span>
-			<input type='text' name='birth' class='inputStyle'/>
+			<input type='date' name='birth' class='inputStyle'/>
 		</p>		
 		<p class='pStyle'>
 			<span class="textStyle">주소</span>
@@ -111,6 +111,17 @@ function checkDuplicate() {
         }
     };
     xhr.send('id=' + encodeURIComponent(id));
+}
+
+// 아이디 중복확인 했을 때만 회원가입이 성공하도록 
+function validateForm() {
+    var duplicateResultElement = document.getElementById('duplicateResult');
+    if (duplicateResultElement.textContent === '사용 가능한 아이디입니다.') {
+        return true; // 폼 제출 허용
+    } else {
+        alert('아이디 중복확인을 먼저 진행해주세요.');
+        return false; // 폼 제출 차단
+    }
 }
 </script>
 

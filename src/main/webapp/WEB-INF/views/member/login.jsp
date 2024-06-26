@@ -35,7 +35,7 @@
 <div id="content">
 	<div class="inner">
 	
-	<form method="post">
+	<form method="post" action="/login">
 
 		<p class='pStyle'>
 			<span class="textStyle">아이디</span>
