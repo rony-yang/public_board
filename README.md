@@ -6,7 +6,7 @@ spring 개인 프로젝트
 **2. 메인 사진**
 ![제목 없음](https://github.com/rony-yang/public_board/assets/116271236/36e214f1-45e1-401c-b6ca-123e839b987e)
 
-![제목 없음2](https://github.com/rony-yang/public_board/assets/116271236/e9eab006-a9b8-4feb-a5ad-8adac7594e9e)
+![22](https://github.com/rony-yang/public_board/assets/116271236/852017d3-0b2a-484a-b6bb-53427422a282)
 
 **3. URL 주소** : 추후 게시 예정
 
