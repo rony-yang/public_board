@@ -104,10 +104,10 @@ public class BoardController {
 	/* 전체 메인 화면 */
 	@GetMapping("/")
 	public String list(ListRequestVO listRequestVO, Model model) {
-		/* logger.info("Search Term: {}", listRequestVO.getSearch()); */
+		logger.info("Search Term: {}", listRequestVO.getSearch());
         
         List<ListResponseVO> listResponseVOList = this.BoardService.list(listRequestVO);
-		/* logger.info("List Response: {}", listResponseVOList); */
+		logger.info("List Response: {}", listResponseVOList);
         
         model.addAttribute("listRequestVO", listRequestVO);
         model.addAttribute("listResponseVOList", listResponseVOList);

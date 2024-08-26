@@ -91,7 +91,7 @@ public class MemberController {
         */
         
         
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", loginId);
 		map.put("password", loginPassword);
 		
