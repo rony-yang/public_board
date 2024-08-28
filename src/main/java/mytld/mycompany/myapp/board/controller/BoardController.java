@@ -26,7 +26,7 @@ import mytld.mycompany.myapp.board.vo.EditRequestVO;
 import mytld.mycompany.myapp.board.vo.ListRequestVO;
 import mytld.mycompany.myapp.board.vo.ListResponseVO;
 
-
+@Controller
 public class BoardController {
 
 	@Autowired
